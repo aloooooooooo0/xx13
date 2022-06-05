@@ -9,6 +9,7 @@ from menuBot import Menu
 import SECRET
 import botGames
 import random
+import wiki
 bot = telebot.TeleBot(SECRET.TELEGRAM_TOKEN)
 import fun
 

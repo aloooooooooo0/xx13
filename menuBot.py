@@ -104,6 +104,7 @@ def goto_menu(bot, chat_id, name_menu):
 
 m_main = Menu("Главное меню", buttons=["Развлечения", "Игры", "Полезное", "Домаха"])
 m_games = Menu("Игры", buttons=["Игра КНБ", "Кости", "Угадай число", "Джарвис", "Выход"], parent=m_main, module="fun")
+m_jar = Menu("Джарвис", buttons=["Поиск", "Выход"], parent=m_games, module="wiki")
 m_games_rsp = Menu("Игра КНБ", buttons=["Камень", "Ножницы", "Бумага", "Выход"], parent=m_games, module="botGames")
 m_dz = Menu("Домаха", buttons=["Имя", "Возраст", "Фамилия", "Вопрос", "В0прос", "В0опрос", "Регистр", "Математика", "Выход"], parent=m_main, module="fun")
 m_poleznoe = Menu("Полезное", buttons=["Курсы", "На вечер", "Погода", "Выход"], parent=m_main, module="fun")

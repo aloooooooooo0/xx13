@@ -10,9 +10,10 @@ from datetime import datetime
 import DZ
 from pycbrf import ExchangeRates
 
-from wiki import get_wiki
+#from wiki import get_wiki
 import random
-from wiki import my_input
+#from wiki import my_input
+#from wiki import jar
 import telebot
 import SECRET
 bot = telebot.TeleBot(SECRET.TELEGRAM_TOKEN)
@@ -70,14 +71,14 @@ def get_text_messages(bot, cur_user, message):
     elif ms_text == "Погода":
         bot.send_message(chat_id, text=get_weather())
 
-    elif ms_text == "Джарвис":
+    # elif ms_text == "Джарвис":
+    #     bot.send_message(chat_id, text=jar)
         #bot.send_message(message.chat.id, "Джарвис находится на стадии разработки")
         #my_jar(bot, chat_id, text=f"Отправьте мне любое слово, и я найду его значение на Wikipedia", get_wiki())
         # bot.send_message(message.chat.id, 'Отправьте мне любое слово, и я найду его значение на Wikipedia')
         #
         # bot.send_message(message.chat.id, get_wiki(message.text))
-        jar_ResponseHandler = lambda message: bot.send_message(chat_id, text=get_wiki(message))
-        my_input(bot, chat_id, "Отправьте мне любое слово, и я найду его значение на Wikipedia", jar_ResponseHandler)
+
 #    elif ms_text == "Угадай число":
 #        bot.send_message(text=digit_games(bot, message, chat_id))
 #        bot.send_message(digit_games(message))
@@ -414,7 +415,7 @@ def process_digit_step(message):
 
 
     if not user_digit.isdigit():
-        msg = 'Ты ввел не цифры. Вводи только цифры!'
+        msg = 'Ты ввел не цифры. Вводи только цифры! Запусти меня заново'
         bot.send_message(chat_id, msg)
         return
 
