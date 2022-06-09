@@ -16,7 +16,7 @@ def domaxa_5(bot, chat_id):
 
 def domaxa_5_ResponseHandler(bot, chat_id, age_int):
     #try:
-        bot.send_message(chat_id, text=f"О! тебе уже {age_int}! \nА через год будет уже {age_int+1}!!!")
+        bot.send_message(chat_id, text=f"О! тебе уже {age_int}! \nА почти {age_int+1}...")
         if int(age_int) > 50 and int(age_int) < 150:
             bot.send_message(chat_id, text=f'Слушай, да ты уже дед, да еще и живой в таком возрасте {age_int+1}!')
         if int(age_int) > 1 and int(age_int) < 50:

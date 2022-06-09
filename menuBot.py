@@ -18,10 +18,10 @@ class Users:
         self.__class__.activeUsers[chat_id] = self
 
     def __str__(self):
-        return f"Name user: {self.firstName}   id: {self.userName}   lang: {self.languageCode}"
+        return f" - Name user: {self.firstName}   id: {self.userName}   lang: {self.languageCode}"
 
     def getUserHTML(self):
-        return f"Name user: {self.firstName}   id: <a href='https://t.me/{self.userName}'>{self.userName}</a>   lang: {self.languageCode}"
+        return f" - Name user: {self.firstName}   id: <a href='https://t.me/{self.userName}'>{self.userName}</a>   lang: {self.languageCode}"
 
     @classmethod
     def getUser(cls, chat_id):
@@ -103,9 +103,10 @@ def goto_menu(bot, chat_id, name_menu):
 # -----------------------------------------------------------------------
 
 m_main = Menu("Главное меню", buttons=["Развлечения", "Игры", "Полезное", "Домаха"])
-m_games = Menu("Игры", buttons=["Игра КНБ", "Кости", "Угадай число", "Джарвис", "Выход"], parent=m_main, module="fun")
+m_games = Menu("Игры", buttons=["Игра КНБ", "Кости", "Угадай число", "Джарвис", "Крестики", "Выход"], parent=m_main, module="fun")
+m_XO = Menu("Крестики", buttons=["Играть в Слоты", "Выход"], parent=m_games, module="gameXO")
 m_games_rsp = Menu("Игра КНБ", buttons=["Камень", "Ножницы", "Бумага", "Выход"], parent=m_games, module="botGames")
-m_dz = Menu("Домаха", buttons=["Имя", "Возраст", "Фамилия", "Вопрос", "В0прос", "В0опрос", "Регистр", "Математика", "Выход"], parent=m_main, module="fun")
+m_dz = Menu("Домаха", buttons=["Имя", "Возраст", "Фамилия", "Вопрос", "В0прос", "Регистр", "Математика", "Выход"], parent=m_main, module="fun") #"В0опрос",
 m_poleznoe = Menu("Полезное", buttons=["Курсы", "На вечер", "Погода", "Выход"], parent=m_main, module="fun")
 m_kyrsi = Menu("Курсы", buttons=["USD", "EUR", "Биток", "Выход"], parent=m_poleznoe, module="fun")
 m_fun = Menu("Развлечения", buttons=["Анекдот", "Кнопка", "Номер", "Угадай кто?", "Аниме", "Выход"], parent=m_main, module="fun")

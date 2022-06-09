@@ -10,9 +10,10 @@ from datetime import datetime
 import DZ
 from pycbrf import ExchangeRates
 
-from wiki import get_wiki
+#from wiki import get_wiki
 import random
-from wiki import my_input
+#from wiki import my_input
+#from wiki import jar
 import telebot
 import SECRET
 bot = telebot.TeleBot(SECRET.TELEGRAM_TOKEN)
@@ -71,13 +72,13 @@ def get_text_messages(bot, cur_user, message):
         bot.send_message(chat_id, text=get_weather())
 
     elif ms_text == "Джарвис":
-        #bot.send_message(message.chat.id, "Джарвис находится на стадии разработки")
+    #     bot.send_message(chat_id, text=jar)
+        bot.send_message(message.chat.id, "Джарвис находится на стадии разработки")
         #my_jar(bot, chat_id, text=f"Отправьте мне любое слово, и я найду его значение на Wikipedia", get_wiki())
         # bot.send_message(message.chat.id, 'Отправьте мне любое слово, и я найду его значение на Wikipedia')
         #
         # bot.send_message(message.chat.id, get_wiki(message.text))
-        jar_ResponseHandler = lambda message: bot.send_message(chat_id, text=get_wiki(message))
-        my_input(bot, chat_id, "Отправьте мне любое слово, и я найду его значение на Wikipedia", jar_ResponseHandler)
+
 #    elif ms_text == "Угадай число":
 #        bot.send_message(text=digit_games(bot, message, chat_id))
 #        bot.send_message(digit_games(message))
@@ -92,7 +93,7 @@ def get_text_messages(bot, cur_user, message):
         random_digit = random.randint(1, 10)
         set_data_storage(message.chat.id, "random_digit", random_digit)
 
-        bot.send_message(message.chat.id, f'Игра "угадай число от 1 до 10"!\nКоличество попыток: 1')
+        bot.send_message(message.chat.id, f'Игра "угадай число от 1 до 10"!')
 #        bot.send_message(message.chat.id, 'Готово! Загадано число от 1 до 10!')
         bot.send_message(message.chat.id, 'Ну давай, введи число, попробуй угадай;)')
 
@@ -130,8 +131,8 @@ def get_text_messages(bot, cur_user, message):
     elif ms_text == "Регистр":
         DZ.domaxa_6(bot, chat_id)
 
-    elif ms_text == "В0опрос":
-        DZ.domaxa_7(bot, chat_id)
+    # elif ms_text == "В0опрос":
+    #     DZ.domaxa_7(bot, chat_id)
 
     elif ms_text == "Математика":
         DZ.domaxa_8(bot, chat_id)
@@ -320,11 +321,9 @@ def get_weather(city = "Sankt-Peterburg"):
 
 def get_biblia():
     book = None
-
     url = ("https://readly.ru/books/i_am_lucky/?show=1")
     page = requests.get(url)
     soup = bs4.BeautifulSoup(page.text, "html.parser")
-
     for b in soup.select("h3 > a"):
         book = ("https://readly.ru" + str(b.get("href")))
     return book
@@ -414,7 +413,7 @@ def process_digit_step(message):
 
 
     if not user_digit.isdigit():
-        msg = 'Ты ввел не цифры. Вводи только цифры!'
+        msg = 'Ты ввел не цифры. Вводи только цифры! Я не буду с тобой игать!'
         bot.send_message(chat_id, msg)
         return
 
@@ -441,7 +440,7 @@ def process_digit_step(message):
         return
 
 # -----------------------------------------------------------------------
-# Генерация ника
+# Генерация номера
 
 def get_number():
     array_num = []
