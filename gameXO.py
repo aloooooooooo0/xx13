@@ -23,23 +23,23 @@ class TTT:
         tmp_player[1] = list(cls.values)
         tmp_player[2] = 0
         tmp_player[3] = 0
-
-        def get_text_messages(bot, cur_user, message):
-            chat_id = message.chat.id
-            ms_text = message.text
-
-            if message.text == "Играть в Слоты":
-                keyboard = types.InlineKeyboardMarkup(row_width=3)
-                button = []
-                for i in range(0, 9):
-                    button.append(types.InlineKeyboardButton(" ", callback_data='position' + str(i)))
-                button.append(types.InlineKeyboardButton(
-                    Translation.get_menu_expression("Выход", call.from_user.id), callback_data='Menu'))
-                keyboard.add(*button)
-                bot.edit_message_text(chat_id=call.message.chat.id,
-                                    reply_markup=keyboard,
-                                    text="❌⭕️",
-                                    message_id=call.message.message_id)
+        #
+        # def get_text_messages(bot, cur_user, message):
+        #     chat_id = message.chat.id
+        #     ms_text = message.text
+        #
+        #     if message.text == "Играть в Слоты":
+        keyboard = types.InlineKeyboardMarkup(row_width=3)
+        button = []
+        for i in range(0, 9):
+            button.append(types.InlineKeyboardButton(" ", callback_data='position' + str(i)))
+        button.append(types.InlineKeyboardButton(
+            Translation.get_menu_expression("Выход", call.from_user.id), callback_data='Menu'))
+        keyboard.add(*button)
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                            reply_markup=keyboard,
+                            text="❌⭕️",
+                            message_id=call.message.message_id)
 
     # Найти игрока по ID
     @classmethod
