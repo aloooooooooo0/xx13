@@ -3,25 +3,8 @@ import pickle
 import os
 
 
-def gen_menu_keyboard(user_id, chat_type):
-    """
-    Функция генерации клавиатуры главного меню.
-    :param user_id: ID пользователя.
-    :param chat_type: Тип чата.
-    :return: Клавиатура.
-    """
-    keyboard = types.InlineKeyboardMarkup(row_width=2)
-    menu_buttons = []
-    if chat_type[0:7] == "private":
-        menu_buttons.extend([
-            types.InlineKeyboardButton(text="XO_private", callback_data="XO_start")])
-
-    keyboard.add(*menu_buttons)
-    return keyboard
-
 # -----------------------------------------------------------------------
 # Это для activeUsers
-
 
 class Users:
     activeUsers = {}
@@ -103,16 +86,11 @@ class Menu:
 
 # -----------------------------------------------------------------------
 
-
 def goto_menu(bot, chat_id, name_menu):
     # получение нужного элемента меню
     cur_menu = Menu.getCurMenu(chat_id)
     if name_menu == "Выход" and cur_menu != None and cur_menu.parent != None:
         target_menu = Menu.getMenu(chat_id, cur_menu.parent.name)
-    elif name_menu == "❌⭕":
-        # на самом деле сразу в приватный заходим
-        bot.send_message(chat_id, "Выбор режима", reply_markup=gen_menu_keyboard(chat_id, 'private'))
-        target_menu = Menu.getMenu(chat_id, name_menu)
     else:
         target_menu = Menu.getMenu(chat_id, name_menu)
 
@@ -124,22 +102,16 @@ def goto_menu(bot, chat_id, name_menu):
 
 # -----------------------------------------------------------------------
 
-
 m_main = Menu("Главное меню", buttons=["Развлечения", "Игры", "Полезное", "Домаха"])
-# ^--^--^--^
-m_fun = Menu("Развлечения", buttons=["Анекдот", "Кнопка", "Номер", "Угадай кто?", "Аниме", "Выход"], parent=m_main, module="fun")
-m_anim = Menu("Аниме", buttons=["Обнимашки", "Подмигивание", "Поглаживание", "Выход"], parent=m_fun, module="fun")
-m_dz = Menu("Домаха", buttons=["Имя", "Возраст", "Фамилия", "Вопрос", "В0прос", "Регистр", "Математика", "Выход"], parent=m_main, module="fun") # "В0опрос"
-
-m_games = Menu("Игры", buttons=["Игра КНБ", "Кости", "Угадай число", "Джарвис", "❌⭕", "Выход"], parent=m_main, module="fun")
-# ^--^--^--^
-m_XO = Menu("❌⭕", buttons=["Выход"], parent=m_games, module="gameXO")
+m_games = Menu("Игры", buttons=["Игра КНБ", "Кости", "Угадай число", "Джарвис", "Крестики", "Выход"], parent=m_main, module="fun")
+m_XO = Menu("Крестики", buttons=["Выход"], parent=m_games, module="gameXO") #"Играть в Слоты",
 m_games_rsp = Menu("Игра КНБ", buttons=["Камень", "Ножницы", "Бумага", "Выход"], parent=m_games, module="botGames")
-
+m_dz = Menu("Домаха", buttons=["Имя", "Возраст", "Фамилия", "Вопрос", "В0прос", "Регистр", "Математика", "Выход"], parent=m_main, module="fun") #"В0опрос",
 m_poleznoe = Menu("Полезное", buttons=["Курсы", "На вечер", "Погода", "Выход"], parent=m_main, module="fun")
-# ^--^--^--^
 m_kyrsi = Menu("Курсы", buttons=["USD", "EUR", "Биток", "Выход"], parent=m_poleznoe, module="fun")
+m_fun = Menu("Развлечения", buttons=["Анекдот", "Кнопка", "Номер", "Угадай кто?", "Аниме", "Выход"], parent=m_main, module="fun")
 m_vecher = Menu("На вечер", buttons=["Фильм", "Библиотека", "Сериал", "Выход"], parent=m_poleznoe, module="fun")
+m_anim = Menu("Аниме", buttons=["Обнимашки", "Подмигивание", "Поглаживание", "Выход"], parent=m_fun, module="fun")
 
 
 Menu.loadCurMenu()
