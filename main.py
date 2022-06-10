@@ -5,7 +5,7 @@ import telebot
 from telebot import types
 import menuBot
 from menuBot import Menu
-# import DZ   домашнее задание от первого урока
+# import DZ домашнее задание от первого урока
 import SECRET
 import botGames
 import random
@@ -117,6 +117,8 @@ def get_text_messages(message):
 # -----------------------------------------------------------------------
 # Так и не могу понять что это такое
 
+from gameXO import TTT
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
     chat_id = call.message.chat.id
@@ -124,6 +126,8 @@ def callback_worker(call):
     cur_user = menuBot.Users.getUser(chat_id)
     if cur_user is None:
         cur_user = menuBot.Users(chat_id, call.message.json["from"])
+    elif call.data in TTT.call_list:
+        TTT.get_callback(call, bot)
 
     tmp = call.data.split("|")
     menu = tmp[0] if len(tmp) > 0 else ""
